@@ -1,0 +1,89 @@
+<!-- base template -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <!--pure css-->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
+  {% block cssfile %}
+  {% endblock cssfile %}
+  <title>SEOUL CINEMA</title>
+</head>
+<body>
+
+  <header class="wrapper">
+      <div class="subNav pure-menu pure-menu-horizontal">
+          <!-- <a href="#" class="pure-menu-heading pure-menu-link">BRAND</a> -->
+          <ul class="pure-menu-list">
+            {% if request.session.customer_id %}
+            <li class="pure-menu-item"><a href="/login/logout" class="pure-menu-link">로그아웃</a></li>
+            <li class="pure-menu-item"><a href="/login/mypage" class="pure-menu-link">마이페이지</a></li>
+            {% else %}
+              <li class="pure-menu-item"><a href="/nonmember_temp_account" class="pure-menu-link">비회원</a></li>
+              <li class="pure-menu-item"><a href="/login" class="pure-menu-link">로그인</a></li>
+              <li class="pure-menu-item"><a href="/make_accounts" class="pure-menu-link">회원가입</a></li>
+              {% endif %}
+              <li class="pure-menu-item"><a href="#" class="pure-menu-link">고객 센터</a></li>
+          </ul>
+        </div>
+
+    <div class="mainNav pure-menu pure-menu-horizontal">
+      <ul class="pure-menu-list">
+          <li id='mainLogo' class="pure-menu-item pure-menu-selected"><a href="/" style="text-decoration: none !important;">서울시네마</a></li>
+          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a href="/movie/" id="menuLink2" class="pure-menu-link">영화</a>
+            <ul class="pure-menu-children" style="background-color:#030302">
+                <li class="pure-menu-item"><a href="/movie/" class="pure-menu-link" >현재상영작</a></li>
+                <li class="pure-menu-item"><a href="/movie/yet/" class="pure-menu-link">상영예정작</a></li>
+            </ul>
+          </li>
+          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+              <a href="/ticket/index/" id="menuLink1" class="pure-menu-link">예매</a>
+              <ul class="pure-menu-children" style="background-color:#030302">
+                  <li class="pure-menu-item"><a href="/ticket/index/" class="pure-menu-link">영화별예매</a></li>
+                  <li class="pure-menu-item"><a href="/ticket/timetable/" class="pure-menu-link">상영시간표</a></li>
+              </ul>
+          </li>
+          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+              <a href="#" id="menuLink3" class="pure-menu-link">극장</a>
+              <ul class="pure-menu-children" style="background-color:#030302">
+                  <li class="pure-menu-item"><a href="#" class="pure-menu-link">극장소개</a></li>
+                  <li class="pure-menu-item"><a href="#" class="pure-menu-link">대관안내</a></li>
+                  <li class="pure-menu-item"><a href="#" class="pure-menu-link">시설안내</a></li>
+              </ul>
+          </li>
+          <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+              <a href="#" id="menuLink4" class="pure-menu-link">이벤트&amp;라운지</a>
+              <ul class="pure-menu-children" style="background-color:#030302">
+                  <li class="pure-menu-item"><a href="#" class="pure-menu-link">이벤트</a></li>
+                  <li class="pure-menu-item"><a href="#" class="pure-menu-link">멤버십</a></li>
+                  <li class="pure-menu-item"><a href="#" class="pure-menu-link">뉴스레터</a></li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+
+  </header>
+
+  <main>
+    {% block content %}
+
+    {% endblock content %}
+  </main>
+
+
+  <footer class="wrapper footerWrapper">
+    <ul class="footerRight">
+      <li>서울특별시 동대문구 휘경동 서울시네마 극장</li>
+      <li>COPYRIGHT 2018 BY 서울시립대학교 데이터베이스 설계 및 실습 8조, All RIGHTS RESERVED</li>
+    </ul>
+  </footer>
+
+</body>
+</html>
